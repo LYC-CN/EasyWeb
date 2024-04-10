@@ -1,25 +1,21 @@
-<h4 align="right"><strong>English</strong> | <a href="https://github.com/LYC-CN/EasyWeb/blob/main/README_CN.md">简体中文</a></h4>
-
 <h1 align="center">EasyWeb</h1>
-<p align="center"><strong>Quickly build web applications, integrate Knife4j interface documentation, customize error codes and global exception handlers, all in EasyWeb.</strong></p>
+<p align="center"><strong>快速构建Web应用，整合Knife4j接口文档，自定义错误码和全局异常处理器，一切尽在EasyWeb。</strong></p>
 
 <div align="center">
     <img alt="Maven" src="https://raster.shields.io/badge/Maven-3.8.1-red.svg"/>
    <img alt="SpringBoot" src="https://raster.shields.io/badge/SpringBoot-2.7+-green.svg"/>
     <a href="http://124.70.165.167/">
-    <img alt="Blog" src="https://raster.shields.io/badge/Blog-Qimu666-blue.svg"/>
+    <img alt="Blog" src="https://raster.shields.io/badge/Blog-LYC-blue.svg"/>
     </a>
-       <img alt="Knife4j" src="https://raster.shields.io/badge/Knife4j-3.0+-orange.svg"/>
+        <img alt="Knife4j" src="https://raster.shields.io/badge/Knife4j-3.0+-orange.svg"/>
 </div>
+## 快速启动 🏁
 
+要开始使用 EasyWeb，您可以按照以下简单步骤进行操作:
 
-## Quick Start 🏁
+1. 创建SpringBoot项目无需引入<span style="color:red">`Web依赖`</span>
 
-To get started with EasyWeb, you can follow these simple steps:
-
-1. Create a SpringBoot project without adding <span style="color:red">`Web dependencies`</span>.
-
-2. Add the dependency coordinates:
+2. 引入依赖坐标
 
    ```xml
    <dependency>
@@ -29,29 +25,30 @@ To get started with EasyWeb, you can follow these simple steps:
    </dependency>
    ```
 
-3. Configuration information:
+3. 配置信息：
 
-   - **💥  Starting from `1.0.0` in the new version, you can use the Knife4j interface documentation, custom error codes, and global exception handlers without any configuration, and you will not feel the presence of EasyWeb**
+   - **💥 在新的版本从`1.0.0`开始，您<span style="color:red">无需任何配置</span>即可使用Knife4j接口文档，自定义错误码和全局异常处理器， 您将感觉不到EasyWeb的存在。**
 
-   - Of course, you can also configure some `personalized` configurations that you need. **The configurations are as follows:**
-   
+   - 当然您也可以配置一些您自己需要的`个性化`配置，**配置如下**：
+
    ```yml
-      knife4j:
-        config:
-          name: Author
-          email: xxx
-          version: API version
-          title: API document
-          description: API document description
-          scan-path: com.jlau.demo.controller
-      spring:
-        profiles:
-          active: dev
+   knife4j:
+     config:
+       name: Author
+       email: xxx
+       url: xxx
+       version: API version
+       title: API document
+       description: API document description
+       scan-path: com.jlau.demo.controller
+   spring:
+     profiles:
+       active: dev
    ```
-   
-   When using, annotations such as `@RestController ` or ` @Controller ` need to be added to the control layer class
-   
-5. **Sample code**
+
+   **使用时需要在控制层类上加上`@RestController`或`@Controller`注解**
+
+4. **示例代码**
 
     ```java
     @GetMapping("/getPoisonousChickenSoupNotSetKey")
@@ -65,20 +62,20 @@ To get started with EasyWeb, you can follow these simple steps:
         return ResultUtils.success(poisonousChickenSoup);
     }
     ```
-    
-6. Response Example：
+
+5. 响应示例：
 
     ```json
     {
       "code": 0,
       "data": {
-        "text": "The three major human illusions a phone rings, someone knocks at the door, and they like me."
+        "text": "人类三大错觉—手机响了，有人敲门，他（她）喜欢我。"
       },
       "message": "ok"
     }
     ```
 
-### If you do not want to use the Knife4j interface documentation, simply configure as follows to close the knife4j interface
+### 如果您不想使用Knife4j接口文档，仅需配置如下，即可关闭knife4j界面
 
  ```yml
     knife4j:
@@ -86,99 +83,98 @@ To get started with EasyWeb, you can follow these simple steps:
       production: true
  ```
 
-### If you want the interface document to enable authentication, just configure the following
+### 如果您想接口文档开启身份验证，仅需配置如下
 
 ```
 knife4j:
-  # Enable enhanced configuration
+  # 开启增强配置
   enable: true
   basic:
     enable: true
-    # Set your own Basic authentication user name
+    # 设置自己的Basic认证用户名
     username: root
-    # Set your own Basic authentication password
+    # 设置自己的Basic认证密码
     password: 1234
 ```
 
-## Custom Error Codes 👌
+## 我们的优势😎
 
-   - By implementing the `Error interface`, you can define your own team’s error handling specifications!
+**相比传统的创建Web项目，无需整合接口文档，拥有丰富的错误码，灵活的全局异常处理器。**
 
-     Example:
-     
-     ```java
-       public enum ErrorCode implements Error {   
-           /**
-            * Status code
-            */
-           private final int code;
-       
-           /**
-            * error message
-            */
-           private final String message;
-           
-           /**
-            * success
-            */
-           SUCCESS(0, "ok"),
-           
-           /**
-            * Request parameter error
-            */
-           PARAMS_ERROR(40000, "请求参数错误")；
-           
-           @Override
-           public int getCode() {
-               return code;
-           }
-           
-           @Override
-           public String getMessage() {
-               return message;
-           }
-       }
-     ```
+- 传统的创建Web项目：
 
-## Our Advantages 😎
+    1. 创建新的项目
 
-  **Compared with the traditional way of creating web projects, there is no need to integrate interface documents, and it has rich error codes and flexible global exception handlers.**
+    2. 编写全局异常处理器
 
-- Traditional way of creating web projects:
+    3. 整合接口文档
 
-  1. Create a new project.
+    4. 自定义错误码
 
-  2. Write a global exception handler.
+    5. 可以自定义自己内部通用返回类
 
-  3. Integrate the interface document.
+    6. 编写业务代码
+- 使用**EasyWeb**
+1. 创建新的项目
+2. 引入EazyWeb坐标
+3. 配置扫描路径和扫描策略
+4. 编写业务代码
 
-  4. Customize error codes.
+## 自定义错误码👌
 
-  5. Customize the common return class.
+- 通过实现`Error接口`即的可定义属于自己的团队的错误处理规范！！！
 
-  6. Write business code.
+ 示例:
 
-- Use **EasyWeb**:
-  1. Create a new project.
-  2. Add EasyWeb coordinates.
-  3. Configure scanning paths and scanning policies.
-  4. Write business code.
+ ```java
+  public enum ErrorCode implements Error {
+    /**
+     * 状态码
+     */
+    private final int code;
 
-## Features 🌟
+    /**
+     * 错误信息
+     */
+    private final String message;
 
-EasyWeb provides a variety of features to make your web development process easier and more efficient. Some key features include:
+    /**
+     * 成功
+     */
+    SUCCESS(0,"ok"),
 
-- Quick and easy web application construction.
-- Simple and intuitive API.
-- Flexibility to customize your web application.
-- And more!
+    /**
+     * 请求参数错误
+     */
+    PARAMS_ERROR(40000,"请求参数错误")；
 
-## Contribution 🤝
+    @Override
+    public int getCode() {
+        return code;
+    }
 
-If you have any questions or suggestions about EasyWeb, please feel free to contact us at any time: 📩 Email: 2483482026@qq.com .
+    @Override
+    public String getMessage() {
+        return message;
+    }
+}
+ ```
 
-## Contact Us 📩
+## 特点 🌟
 
-If you have any questions or suggestions about EasyWeb, please feel free to [contact us](483930433@qq.com).
+EasyWeb 提供了各种功能，使您的 Web 开发过程更加轻松和高效。一些关键功能包括：
 
-Thank you for using EasyWeb! 😊
+- 快速简单的 Web 应用程序构建
+- 简单直观的 API
+- 灵活性，可以自定义您的 Web 应用程序
+- 还有更多！
+
+## 贡献 🤝
+
+如果您想为 EasyWeb 做出贡献，请随时提交拉取请求。我们始终在寻找方法来改进项目，使其对像您这样的开发者更有用。
+
+## 联系我们 📩
+
+如果您对 EasyWeb 有任何问题或建议，请随时联系我们:📩邮箱：483930433@qq.com。
+
+感谢您使用 EasyWeb！ 😊
